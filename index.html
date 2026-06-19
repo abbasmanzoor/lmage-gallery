@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LUMINA | Digital Photography Gallery</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+    </script>
+
+    <!-- Google Fonts: Geist -->
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
+
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind Custom Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#93ccff",
+                        "secondary-container": "#3e495d",
+                        "primary-container": "#f97316",
+                        "surface-container-low": "#131b2e",
+                        "primary-fixed-dim": "#ffb690",
+                        "on-tertiary-container": "#003554",
+                        "tertiary": "#93ccff",
+                        "on-surface-variant": "#e0c0b1",
+                        "on-primary-fixed-variant": "#783200",
+                        "surface-dim": "#0b1326",
+                        "on-surface": "#dae2fd",
+                        "on-tertiary": "#003351",
+                        "on-background": "#dae2fd",
+                        "secondary-fixed": "#d8e3fb",
+                        "tertiary-container": "#00a2f4",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-tertiary-fixed": "#001d32",
+                        "outline-variant": "#584237",
+                        "on-error": "#690005",
+                        "on-primary": "#552100",
+                        "surface-container-highest": "#2d3449",
+                        "on-primary-container": "#582200",
+                        "error": "#ffb4ab",
+                        "secondary": "#bcc7de",
+                        "on-tertiary-fixed-variant": "#004b74",
+                        "inverse-surface": "#dae2fd",
+                        "on-error-container": "#ffdad6",
+                        "inverse-primary": "#9d4300",
+                        "on-secondary-container": "#aeb9d0",
+                        "inverse-on-surface": "#283044",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "surface-bright": "#31394d",
+                        "primary": "#ffb690",
+                        "tertiary-fixed": "#cde5ff",
+                        "on-secondary": "#263143",
+                        "surface-container-lowest": "#060e20",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#222a3d",
+                        "primary-fixed": "#ffdbca",
+                        "surface-tint": "#ffb690",
+                        "on-primary-fixed": "#341100",
+                        "surface-variant": "#2d3449",
+                        "background": "#0b1326",
+                        "surface": "#0b1326",
+                        "surface-container": "#171f33",
+                        "outline": "#a78b7d"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "stack-lg": "32px",
+                        "container-max": "1440px",
+                        "stack-md": "16px",
+                        "margin-mobile": "20px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px"
+                    },
+                    fontFamily: {
+                        "title-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "label-caps": ["Geist"],
+                        "body-lg": ["Geist"]
+                    },
+                    fontSize: {
+                        "title-md": ["20px", { lineHeight: "1.4", fontWeight: "500" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "1.2", fontWeight: "600" }],
+                        "display-lg": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg": ["32px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "body-lg": ["16px", { lineHeight: "1.6", fontWeight: "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* ── Base ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Geist', sans-serif;
+            background-color: #0b1326;
+            color: #dae2fd;
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            overflow-y: auto !important;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        /* ── Scrollbar hide (mobile) ── */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* ── Glass effects ── */
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* ── Shimmer loading ── */
+        .shimmer {
+            background: linear-gradient(90deg, #1e293b 25%, #2d3449 50%, #1e293b 75%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* ── Hover lift ── */
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ── Image card gradient overlay ── */
+        .image-card-gradient {
+            background: linear-gradient(to top, rgba(11, 19, 38, 0.92) 0%, rgba(11, 19, 38, 0) 55%);
+        }
+
+        /* ── Lightbox transitions ── */
+        #lightbox {
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        #lightbox.hidden-lightbox {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* ── Mobile Sidebar ── */
+        #mobileSidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            max-width: 85vw;
+            height: 100vh;
+            background: #0b1326;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 70;
+            transform: translateX(-100%);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow-y: auto;
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+        #mobileSidebar.open {
+            transform: translateX(0);
+        }
+
+        /* Sidebar backdrop */
+        #sidebarBackdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 65;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #sidebarBackdrop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ── Sidebar styles ── */
+        .sidebar-logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #f97316;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex: 1;
+        }
+        .sidebar-nav a {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active-sidebar {
+            background: rgba(249, 115, 22, 0.12);
+            color: #f97316;
+        }
+        .sidebar-actions {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .sidebar-actions .btn-upload {
+            background: #f97316;
+            color: #582200;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .sidebar-actions .btn-upload:hover {
+            background: #fb923c;
+        }
+        .sidebar-actions .btn-signin {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .sidebar-actions .btn-signin:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+        .sidebar-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: color 0.2s ease;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+        }
+        .sidebar-close:hover {
+            color: #fff;
+        }
+
+        /* ── Desktop nav links ── */
+        .desktop-nav-link {
+            font-weight: 500;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+        .desktop-nav-link:hover {
+            color: #f97316;
+        }
+
+        /* ── Image reveal on scroll ── */
+        .reveal-card {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Active filter ── */
+        .filter-btn.active {
+            background-color: #f97316;
+            color: #582200;
+            box-shadow: 0 0 24px rgba(249, 115, 22, 0.25);
+        }
+        .filter-btn.active:hover {
+            background-color: #f97316;
+            color: #582200;
+        }
+
+        /* ── Modal transitions ── */
+        .modal-overlay {
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+            pointer-events: none;
+        }
+        .modal-overlay.hidden-modal {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .modal-overlay:not(.hidden-modal) {
+            pointer-events: auto;
+        }
+        .modal-box {
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
+            pointer-events: auto;
+        }
+        .modal-overlay:not(.hidden-modal) .modal-box {
+            transform: scale(1) translateY(0);
+        }
+
+        /* ── File input styling ── */
+        .file-drop-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            transition: border-color 0.3s ease, background 0.3s ease;
+            cursor: pointer;
+        }
+        .file-drop-zone:hover,
+        .file-drop-zone.dragover {
+            border-color: #f97316;
+            background: rgba(249, 115, 22, 0.05);
+        }
+        .file-drop-zone .file-preview img {
+            max-height: 160px;
+            object-fit: cover;
+        }
+
+        /* ── Form input styling ── */
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #dae2fd;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            width: 100%;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-family: 'Geist', sans-serif;
+            font-size: 0.95rem;
+            pointer-events: auto;
+            outline: none;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .form-input.border-error {
+            border-color: #ffb4ab;
+        }
+        .form-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.35rem;
+            display: block;
+        }
+        .form-label .required-star {
+            color: #ffb4ab;
+            margin-left: 2px;
+        }
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        .form-select option {
+            background: #1e293b;
+            color: #dae2fd;
+        }
+
+        /* ── Toast notification ── */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.9rem 2rem;
+            border-radius: 1rem;
+            font-family: 'Geist', sans-serif;
+            font-size: 0.95rem;
+            color: #dae2fd;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            z-index: 999;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+            opacity: 0;
+            pointer-events: none;
+            white-space: nowrap;
+            max-width: 90vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .toast.success {
+            border-left: 4px solid #4ade80;
+        }
+        .toast.error {
+            border-left: 4px solid #f87171;
+        }
+        .toast.info {
+            border-left: 4px solid #f97316;
+        }
+
+        /* ── Responsive tweaks ── */
+        @media (max-width: 768px) {
+            .display-lg {
+                font-size: 32px !important;
+            }
+            .headline-lg {
+                font-size: 24px !important;
+            }
+            .toast {
+                white-space: normal;
+                padding: 0.8rem 1.2rem;
+                bottom: 1.2rem;
+                font-size: 0.85rem;
+                max-width: 92vw;
+            }
+            .modal-box {
+                padding: 1.5rem !important;
+                margin: 0.5rem;
+                max-height: 98vh;
+            }
+            .form-input {
+                font-size: 16px !important;
+                padding: 0.7rem 0.9rem;
+            }
+            #mobileSidebar {
+                padding: 1.25rem 1rem;
+            }
+            .sidebar-logo {
+                font-size: 1.5rem;
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
+            .sidebar-nav a {
+                font-size: 0.95rem;
+                padding: 0.6rem 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .display-lg {
+                font-size: 28px !important;
+            }
+        }
+
+        .modal-overlay:not(.hidden-modal) .modal-box input,
+        .modal-overlay:not(.hidden-modal) .modal-box select,
+        .modal-overlay:not(.hidden-modal) .modal-box textarea,
+        .modal-overlay:not(.hidden-modal) .modal-box button,
+        .modal-overlay:not(.hidden-modal) .modal-box .file-drop-zone {
+            pointer-events: auto !important;
+        }
+        select.form-input option {
+            padding: 8px 12px;
+        }
+
+        /* ── Hide desktop nav on mobile ── */
+        @media (max-width: 767px) {
+            .desktop-nav-wrap {
+                display: none !important;
+            }
+            .desktop-actions-wrap {
+                display: none !important;
+            }
+            .mobile-actions-wrap {
+                display: flex !important;
+            }
+        }
+        @media (min-width: 768px) {
+            .desktop-nav-wrap {
+                display: flex !important;
+            }
+            .desktop-actions-wrap {
+                display: flex !important;
+            }
+            .mobile-actions-wrap {
+                display: none !important;
+            }
+            #mobileSidebar {
+                display: none !important;
+            }
+            #sidebarBackdrop {
+                display: none !important;
+            }
+        }
+
+        /* ── Sidebar scroll styling ── */
+        #mobileSidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        #mobileSidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #mobileSidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!--  TOAST NOTIFICATION                                    -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!--  HEADER  (fixed, glass)                               -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <header id="mainHeader" class="fixed top-0 w-full z-50 bg-surface-container/80 glass-header shadow-sm transition-all duration-300 ease-out">
+        <div class="flex justify-between items-center px-4 md:px-margin-desktop py-3 md:py-4 max-w-container-max mx-auto">
+            <!-- Logo -->
+            <a href="#" id="logoLink" class="font-display-lg text-headline-lg-mobile md:text-headline-lg tracking-tighter text-primary-container dark:text-primary hover:opacity-80 transition-opacity">
+                LUMINA
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="desktop-nav-wrap hidden md:flex items-center gap-stack-lg">
+                <a class="desktop-nav-link font-title-md text-title-md text-on-surface-variant hover:text-primary-container" data-category="nature">Nature</a>
+                <a class="desktop-nav-link font-title-md text-title-md text-on-surface-variant hover:text-primary-container" data-category="animals">Animals</a>
+                <a class="desktop-nav-link font-title-md text-title-md text-on-surface-variant hover:text-primary-container" data-category="cities">Cities</a>
+                <a class="desktop-nav-link font-title-md text-title-md text-on-surface-variant hover:text-primary-container" data-category="travel">Travel</a>
+            </nav>
+
+            <!-- Desktop Actions -->
+            <div class="desktop-actions-wrap hidden md:flex items-center gap-gutter">
+                <button id="desktopUploadBtn" class="font-title-md text-title-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Upload</button>
+                <button id="desktopSignInBtn" class="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-title-md text-title-md hover:brightness-110 transition-all shadow-lg shadow-primary-container/20 cursor-pointer">Sign In</button>
+            </div>
+
+            <!-- Mobile Actions -->
+            <div class="mobile-actions-wrap flex md:hidden items-center gap-3">
+                <button class="p-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer" aria-label="Search">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+                <button id="mobileMenuBtn" class="p-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer" aria-label="Toggle menu">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!--  MOBILE SIDEBAR (slide-in from left)                   -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div id="sidebarBackdrop"></div>
+
+    <aside id="mobileSidebar" role="navigation" aria-label="Mobile navigation">
+        <button id="sidebarCloseBtn" class="sidebar-close" aria-label="Close menu">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+
+        <div class="sidebar-logo">LUMINA</div>
+
+        <nav class="sidebar-nav">
+            <a data-category="nature" class="active-sidebar">🌿 Nature</a>
+            <a data-category="animals">🐾 Animals</a>
+            <a data-category="cities">🏙️ Cities</a>
+            <a data-category="travel">✈️ Travel</a>
+            <a data-category="all" style="margin-top:0.5rem;border-top:1px solid rgba(255,255,255,0.05);padding-top:0.75rem;">✨ All</a>
+        </nav>
+
+        <div class="sidebar-actions">
+            <button id="sidebarUploadBtn" class="btn-upload">
+                <span class="material-symbols-outlined" style="font-size:1.2rem;vertical-align:middle;">cloud_upload</span>
+                Upload
+            </button>
+            <button id="sidebarSignInBtn" class="btn-signin">
+                <span class="material-symbols-outlined" style="font-size:1.2rem;vertical-align:middle;">account_circle</span>
+                Sign In
+            </button>
+        </div>
+    </aside>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!--  SIGN IN MODAL                                         -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div id="signInModal" class="modal-overlay hidden-modal fixed inset-0 z-[80] flex items-center justify-center bg-surface-container-lowest/90 backdrop-blur-md p-4">
+        <div class="modal-box w-full max-w-md bg-surface-container-high rounded-2xl border border-outline-variant/20 shadow-2xl p-6 md:p-8 relative">
+            <button id="signInClose" class="absolute top-4 right-4 p-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 mx-auto rounded-full bg-primary-container/20 flex items-center justify-center mb-3">
+                    <span class="material-symbols-outlined text-3xl text-primary">account_circle</span>
+                </div>
+                <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Welcome Back</h2>
+                <p class="text-on-surface-variant text-body-sm mt-1">Sign in to your Lumina account</p>
+            </div>
+            <form id="signInForm" class="space-y-4" novalidate>
+                <div>
+                    <label class="form-label" for="signInEmail">Email Address</label>
+                    <input id="signInEmail" type="email" class="form-input" placeholder="you@example.com" required autocomplete="email" />
+                    <span id="signInEmailError" class="text-error text-xs mt-1 hidden">Please enter a valid email</span>
+                </div>
+                <div>
+                    <label class="form-label" for="signInPassword">Password</label>
+                    <input id="signInPassword" type="password" class="form-input" placeholder="••••••••" required minlength="6" autocomplete="current-password" />
+                    <span id="signInPassError" class="text-error text-xs mt-1 hidden">Password must be at least 6 characters</span>
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                    <label class="flex items-center gap-2 text-on-surface-variant cursor-pointer">
+                        <input type="checkbox" class="accent-primary-container w-4 h-4 rounded" />
+                        <span class="text-body-sm">Remember me</span>
+                    </label>
+                    <a href="#" class="text-primary hover:underline text-body-sm">Forgot password?</a>
+                </div>
+                <button type="submit" class="w-full py-3 bg-primary-container text-on-primary-container rounded-xl font-title-md text-title-md hover:brightness-110 transition-all shadow-lg shadow-primary-container/20 active:scale-95 cursor-pointer">
+                    Sign In
+                </button>
+                <p class="text-center text-on-surface-variant text-body-sm">
+                    Don't have an account?
+                    <a href="#" class="text-primary hover:underline">Create one</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!--  UPLOAD MODAL                                          -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div id="uploadModal" class="modal-overlay hidden-modal fixed inset-0 z-[80] flex items-center justify-center bg-surface-container-lowest/90 backdrop-blur-md p-3 md:p-4">
+        <div class="modal-box w-full max-w-lg bg-surface-container-high rounded-2xl border border-outline-variant/20 shadow-2xl p-5 md:p-8 relative max-h-[98vh] overflow-y-auto">
+            <button id="uploadClose" class="absolute top-4 right-4 p-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer z-10">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <div class="text-center mb-5">
+                <div class="w-14 h-14 mx-auto rounded-full bg-primary-container/20 flex items-center justify-center mb-3">
+                    <span class="material-symbols-outlined text-3xl text-primary">cloud_upload</span>
+                </div>
+                <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Upload Masterpiece</h2>
+                <p class="text-on-surface-variant text-body-sm mt-1">Share your photography with the Lumina community</p>
+            </div>
+            <form id="uploadForm" class="space-y-5" novalidate>
+                <!-- File Drop Zone -->
+                <div>
+                    <label class="form-label">Image File <span class="required-star">*</span></label>
+                    <div id="fileDropZone" class="file-drop-zone relative rounded-xl p-6 text-center cursor-pointer transition-all">
+                        <input type="file" id="fileInput" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer z-20" />
+                        <div id="filePlaceholder" class="flex flex-col items-center gap-2 pointer-events-none">
+                            <span class="material-symbols-outlined text-4xl text-outline">image</span>
+                            <p class="text-on-surface-variant text-body-sm">Drag & drop or <span class="text-primary">browse</span></p>
+                            <p class="text-on-surface-variant/50 text-xs">PNG, JPG, WEBP up to 20MB</p>
+                        </div>
+                        <div id="filePreview" class="hidden flex flex-col items-center gap-2 pointer-events-none">
+                            <img id="filePreviewImg" class="rounded-lg max-h-40 w-auto object-contain pointer-events-none" src="" alt="Preview" />
+                            <p id="filePreviewName" class="text-on-surface text-sm font-medium pointer-events-none"></p>
+                            <button type="button" id="fileRemoveBtn" class="text-error text-xs hover:underline cursor-pointer pointer-events-auto relative z-30">Remove</button>
+                        </div>
+                    </div>
+                    <span id="fileError" class="text-error text-xs mt-1 hidden">Please select an image file</span>
+                </div>
+
+                <!-- Title -->
+                <div>
+                    <label class="form-label" for="uploadTitle">Title <span class="required-star">*</span></label>
+                    <input id="uploadTitle" type="text" class="form-input" placeholder="e.g. 'Golden Hour Serenity'" required autofocus />
+                    <span id="titleError" class="text-error text-xs mt-1 hidden">Title is required</span>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label class="form-label" for="uploadDesc">Description</label>
+                    <textarea id="uploadDesc" rows="2" class="form-input resize-none" placeholder="Tell the story behind this image..."></textarea>
+                </div>
+
+                <!-- Category -->
+                <div>
+                    <label class="form-label" for="uploadCategory">Category <span class="required-star">*</span></label>
+                    <select id="uploadCategory" class="form-input form-select" required>
+                        <option value="">Select a category</option>
+                        <option value="nature">🌿 Nature</option>
+                        <option value="animals">🐾 Animals</option>
+                        <option value="cities">🏙️ Cities</option>
+                        <option value="travel">✈️ Travel</option>
+                    </select>
+                    <span id="categoryError" class="text-error text-xs mt-1 hidden">Please select a category</span>
+                </div>
+
+                <!-- Location -->
+                <div>
+                    <label class="form-label" for="uploadLocation">Location</label>
+                    <input id="uploadLocation" type="text" class="form-input" placeholder="e.g. 'Yosemite, CA'" />
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-primary-container text-on-primary-container rounded-xl font-title-md text-title-md hover:brightness-110 transition-all shadow-lg shadow-primary-container/20 active:scale-95 cursor-pointer">
+                    <span class="flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-xl">publish</span>
+                        Publish to Gallery
+                    </span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!--  MAIN CONTENT                                         -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <main class="pt-20 md:pt-32 pb-8">
+
+        <!-- ─── HERO ─── -->
+        <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-12 md:mb-24 relative">
+            <div class="grid grid-cols-12 gap-gutter items-center">
+
+                <!-- Hero Text -->
+                <div class="col-span-12 md:col-span-7">
+                    <h1 class="font-display-lg text-display-lg mb-stack-md text-on-surface">
+                        Image Gallery
+                    </h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-stack-lg">
+                        Explore a curated collection of high-definition photography from across the globe.
+                        From the quiet serenity of nature to the bustling energy of modern metropolises,
+                        Lumina captures the world through a premium lens.
+                    </p>
+                    <div class="flex flex-wrap gap-stack-md">
+                        <button id="heroExploreBtn" class="bg-primary-container text-on-primary-container px-8 py-4 rounded-xl font-title-md text-title-md hover:scale-105 transition-transform shadow-lg shadow-primary-container/20 cursor-pointer">
+                            Start Exploring
+                        </button>
+                        <button id="heroCollectionsBtn" class="border border-outline text-on-surface px-8 py-4 rounded-xl font-title-md text-title-md hover:bg-surface-container transition-colors cursor-pointer">
+                            View Collections
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hero Images (desktop only) -->
+                <div class="hidden md:block col-span-5 relative h-[400px]">
+                    <div class="absolute inset-0 rounded-3xl overflow-hidden shimmer shadow-2xl rotate-3">
+                        <img class="w-full h-full object-cover opacity-80"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBILtjL6UxYZbcKHxJ7sI2_w_dzEmil2GNigQ66aVjfMRq8iGeQYndRVtQhQ9mrzHO4ZVzKi_DCKMGOmZb37trQx-dH-w9n77r82-PMXhkUrWRtbgYyQMsU5JWHsKjG83epnekGGOP9SM3an16jpMFIrIUvWKhYv89INBVL1I-4se4OqbJ7bbu0n_T0Qgfxz0DbIShldBlDDWiPch_qzPEZPAZFV-SlVEvvwigDIw7yonfDRuZoaUtvRU1-oQYhTfu9KiNTCka17g"
+                        alt="Cinematic camera lens reflecting neon city" />
+                    </div>
+                    <div class="absolute inset-4 -left-12 -bottom-8 rounded-3xl overflow-hidden shimmer shadow-2xl -rotate-6 border-4 border-surface-container">
+                        <img class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuASkYSRDCWzCgKIXKU3PBa2ObCe7aGa9jLxYBLd3DzFw94FOtdfIzqWAyLoKMZDP6KqxB4v_aSSqKV3jrh65XkCx3-mpTvDECXzLKOUI0cAlhmcU3qZkJLeYyW7yOBkAABN3DUvF2OPRRUWZY5wjmAaSApMsuIz85aBl8zNLgpP3KAX2C_ASLfR86mH8BfrXL6hn-lo2dzqR13Ft5YW2fGs_V-p8LyUyBu2-2Tli0tPRYmhQ630_YJS0QYanYZqne5YVSRKpcsldw"
+                        alt="Misty mountain range at sunrise" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── CATEGORY FILTERS ─── -->
+        <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-stack-lg">
+            <div class="flex flex-wrap items-center gap-3 md:gap-stack-md overflow-x-auto no-scrollbar pb-2">
+                <button class="filter-btn active px-5 md:px-6 py-2 rounded-full font-label-caps text-label-caps bg-primary-container text-on-primary-container shadow-lg shadow-primary-container/20 transition-all cursor-pointer" data-filter="all">All</button>
+                <button class="filter-btn px-5 md:px-6 py-2 rounded-full font-label-caps text-label-caps bg-surface-container text-on-surface-variant hover:text-primary transition-colors border border-outline/10 cursor-pointer" data-filter="nature">Nature</button>
+                <button class="filter-btn px-5 md:px-6 py-2 rounded-full font-label-caps text-label-caps bg-surface-container text-on-surface-variant hover:text-primary transition-colors border border-outline/10 cursor-pointer" data-filter="animals">Animals</button>
+                <button class="filter-btn px-5 md:px-6 py-2 rounded-full font-label-caps text-label-caps bg-surface-container text-on-surface-variant hover:text-primary transition-colors border border-outline/10 cursor-pointer" data-filter="cities">Cities</button>
+                <button class="filter-btn px-5 md:px-6 py-2 rounded-full font-label-caps text-label-caps bg-surface-container text-on-surface-variant hover:text-primary transition-colors border border-outline/10 cursor-pointer" data-filter="travel">Travel</button>
+            </div>
+        </section>
+
+        <!-- ─── IMAGE GRID ─── -->
+        <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-gutter">
+                <!-- Cards will be rendered by JavaScript -->
+            </div>
+
+            <!-- Load More -->
+            <div class="mt-stack-lg flex justify-center">
+                <button id="loadMoreBtn" class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md py-4 cursor-pointer">
+                    <span class="material-symbols-outlined">expand_more</span>
+                    Explore More Masterpieces
+                </button>
+            </div>
+        </section>
+
+        <!-- ─── MOBILE CTA ─── -->
+        <section class="max-w-container-max mx-auto px-margin-mobile mt-stack-lg md:hidden">
+            <div class="bg-surface-container-high rounded-xl p-stack-lg text-center relative overflow-hidden border border-outline-variant/10">
+                <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-48 h-48 bg-primary-container/10 rounded-full blur-3xl"></div>
+                <h3 class="font-headline-lg-mobile text-on-surface mb-stack-sm">Contribute to Lumina</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Join our elite community of curators and photographers from around the globe.</p>
+                <button id="mobileCtaUploadBtn" class="w-full py-4 bg-primary-container text-on-primary-container rounded-full font-title-md text-title-md shadow-lg shadow-primary-container/20 active:scale-95 transition-transform cursor-pointer">
+                    Submit Portfolio
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!--  FOOTER                                               -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <footer class="w-full py-stack-lg bg-surface-container-lowest dark:bg-surface-container-lowest mt-8 md:mt-0">
+        <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-gutter max-w-container-max mx-auto">
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <div class="font-title-md text-title-md text-primary-container">LUMINA</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant opacity-80">© 2024 Lumina Gallery. All rights reserved.</p>
+            </div>
+            <nav class="flex flex-wrap justify-center gap-stack-lg mt-4 md:mt-0">
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Contact</a>
+                <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">About</a>
+            </nav>
+            <div class="flex gap-stack-md mt-4 md:mt-0">
+                <a class="p-2 rounded-full bg-surface-container hover:bg-secondary-container transition-colors" href="#">
+                    <span class="material-symbols-outlined text-on-surface">public</span>
+                </a>
+                <a class="p-2 rounded-full bg-surface-container hover:bg-secondary-container transition-colors" href="#">
+                    <span class="material-symbols-outlined text-on-surface">photo_camera</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!--  LIGHTBOX OVERLAY                                     -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <div id="lightbox" class="fixed inset-0 z-[75] flex items-center justify-center bg-surface-container-lowest/95 backdrop-blur-xl hidden-lightbox">
+
+        <button id="lightboxClose" class="absolute top-4 md:top-8 right-4 md:right-margin-desktop z-[80] text-on-surface hover:text-primary transition-colors group cursor-pointer">
+            <span class="material-symbols-outlined text-3xl md:text-4xl">close</span>
+        </button>
+
+        <button id="lightboxPrev" class="absolute left-2 md:left-margin-desktop top-1/2 -translate-y-1/2 z-[80] p-3 md:p-4 rounded-full bg-surface-container-high/40 hover:bg-surface-container-high text-on-surface transition-all group cursor-pointer">
+            <span class="material-symbols-outlined text-2xl md:text-4xl">chevron_left</span>
+        </button>
+
+        <div class="relative w-full h-full max-w-[92vw] md:max-w-[85vw] max-h-[80vh] md:max-h-[819px] flex flex-col items-center justify-center gap-3 md:gap-stack-md px-4 md:px-10">
+            <div class="relative w-full h-full flex items-center justify-center group/img">
+                <img id="lightboxImg" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-transform duration-500 hover:scale-[1.01]"
+                src=""
+                alt="Lightbox view" />
+
+                <div id="lightboxMeta" class="absolute bottom-0 left-0 right-0 p-4 md:p-stack-lg bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 rounded-b-lg">
+                    <div class="flex flex-wrap justify-between items-end gap-2">
+                        <div>
+                            <p id="lbCategory" class="font-label-caps text-primary uppercase mb-1">Category</p>
+                            <h3 id="lbTitle" class="font-headline-lg text-xl md:text-2xl text-white">Title</h3>
+                            <p id="lbLocation" class="text-on-surface-variant text-xs md:text-sm mt-1">Location</p>
+                        </div>
+                        <div class="flex gap-3 md:gap-4">
+                            <button class="p-2 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all cursor-pointer">
+                                <span class="material-symbols-outlined text-sm md:text-base">share</span>
+                            </button>
+                            <button class="p-2 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all cursor-pointer">
+                                <span class="material-symbols-outlined text-sm md:text-base">favorite</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="lbCounter" class="font-label-caps text-on-surface-variant tracking-widest text-xs md:text-sm">
+                01 <span class="mx-1 md:mx-2 text-outline">/</span> 09
+            </div>
+        </div>
+
+        <button id="lightboxNext" class="absolute right-2 md:right-margin-desktop top-1/2 -translate-y-1/2 z-[80] p-3 md:p-4 rounded-full bg-surface-container-high/40 hover:bg-surface-container-high text-on-surface transition-all group cursor-pointer">
+            <span class="material-symbols-outlined text-2xl md:text-4xl">chevron_right</span>
+        </button>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!--  JAVASCRIPT                                            -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ─── STORAGE KEY ───────────────────────────────────
+            const STORAGE_KEY = 'lumina_gallery_data';
+
+            // ─── Default gallery data ──────────────────────────
+            const defaultGalleryData = [
+                { category: 'cities', label: 'ARCHITECTURAL', title: 'Silent Curves', location: 'Helsinki, Finland',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCTo2UbXkLZLGXE_J5L_VnwfcJQIZFLxtIbDAp2XkCZtSoQsNYSG1mWkgHPqL_1KSDNG5MEJFdC5L-CnfB14pXbwslNeamVdO5rLmpgQ-OXS_ivjK5N6kAFiMa6Tswif8H3vj1SgO6kRUrKHv4AuH8-f2AfGgpXu7LUEvsOASxXpZ21TcsmSHkaztDgvn4O7GQ-MtK1arl4g1vFMr7s8LXGEIcazrhmWm3uzyjPGXYO4L-6fZBIXYskpi7sbwieUG8gdDKnkUPhww' },
+                { category: 'animals', label: 'WILDLIFE', title: 'Amber Watch', location: 'Bengal Tiger',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFsi3rRtncZSNqxBBsuTuEeJNnvj4azEttH_YsC3JOqrHNg1FM25Nssu9NwAwuRw6Nfgs-BDaf5C11tW0Oj82y2vMcMEJZ0YesC48U9993bwc4NPrbFqLUVaSjRYFCZ4YAqHDkGYoHXcazfRA7MzY70rR_S46CD3f0tK6wdRfh1ufdyr3aTfMtGDMIEq7QKkdfhnauAve4Cb08D0xGo0bzc8SwBRSPtA3NOKiivoDMfBIH8onQO_HPs6xvIVzQKkYWFh-AJiTj7g' },
+                { category: 'cities', label: 'URBAN', title: 'Electric Arteries', location: 'Shinjuku, Japan',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAWtx5MRH-wr7aKEHbDm5ZpDy_fhylJvHoZJU5FbNtE3ypeGIUI__weuGZtIeOEWFH6RClyGT8mK-wB0lLkQ3upaQc45w9dQMxyTk3QZtE5kONXehkknk44kK-KYRlZdM5PgCuWYeafiPkNgNlR39B3B_j1TLmRbXg7mHbZ3Y52doZlVjRGVf3JIO9xT9-jWFtR5hTt-cPdFYHgS6FyAJMiqji19ioCsj4Z8bqh9ntnO09us3m2F8kIAeiSCdmhgVDVbEhgK-9Dzg' },
+                { category: 'nature', label: 'NATURE', title: 'Glacial Echo', location: 'Alberta, Canada',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqNLjCevuKPybi4EnvHIVdcmrMwe7uNj-kl5Pe8z-KNlnBc6eN0czSLetjJzJcw7tZ5aGNTN3xeiFUcQ_Y3_UBigblOG0s0XS3anGDzgday7xKQBW8S9ZJikBtY-hWxu6R689FB7aoMLnGatA0fFo74-ywzjVleFZdqytxhJ3uTy-EAgt-tAc5MfDxOPsfaaJYIOkKpNcw-HlnoV1_l5ExjFuCWMqEOgWzjuvZc0jwP-bP1A3B1Qub9MPqyRStAnlaWRWS6evAbg' },
+                { category: 'travel', label: 'TRAVEL', title: 'The Weaver', location: 'Marrakech, Morocco',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnnyzagNFZBQFC5JY5yN4gDFX0YfmzgvSDZnDD0YLGYhSGJKuwnIAWWHf_QVhvXsYXRYED6tBcZb5IPjjiBJ8DC3Krv0kam5TxTgTTtHTNGgeM_HZDtiUwLlYXbbSGyZQVRzy9MMhrZd5I-DiAg2qIi9gR5ErsMzFGbV9-0wsLJSG-KVNGTTA0mvEA8BhMfwJRn_b_M9VmQNPfBpcg9wEkyVS5Q1Hl7KVfrVQC9T8IxVA9bimgg_BeXlyzDBe_m747boA6QG2OQQ' },
+                { category: 'travel', label: 'AUTOMOTIVE', title: 'Edge of Horizon', location: 'Amalfi Coast, Italy',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD0MKIA9vTH078Wpb1_af-uPCX7P8QB0R6Yc1NEOrbrELTOAcRh8FLJjQN0pVUQNIBZHnQbqpM5wXMMAfN6W13q0gS9yLKwlt5Uhd-jKyzshfa5S5ONdO3n5UqMwBCDyt8RsftKOZgEo_6eji3lJt8axcNHH0-sRKnjrgfG2DwTVNXmfneA0J9-HMjGJj0ntc7eZbeP7U6fKPpxasfauTi3cPvtMJ5M-nEsmBaW87QAkpU5rdcnGJAjK4TVH1gCa7dA50BB2RwziA' },
+                { category: 'nature', label: 'ASTRONOMY', title: 'Solar Winds', location: 'Vik, Iceland',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCVFfApbG5taR-43FFTqFYHtRwDuRCaEaSpomgLjCLXL5IFPTa1xqejf8j8RtFN216zkuZdfTnJX4GfCRSIu1443tgYX_606RX_MxBCZ4MZ3vxjPI4lDfL6D1xN4DFF9cQnJ3ob8fY2n9iduFeu6rqYCjRM9V2cxDxkgKYS6SHUJO7uq-RG1YjjBEv9pbIQk7A9llH2cTNtp5Jzwf9UD_FBemGF8haqRjS2XyjT4miz-823qC3fgofQwyWpzP-VBtP5IVCZkEtYtA' },
+                { category: 'cities', label: 'FASHION', title: 'Chrome Reverie', location: 'Paris Fashion Week',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqVWWsF6M4g5lWeWej1qm0Eu5AXDT0UaGk_B5AzzDomQn2a9_AUwZEF_JfxXz_HXfFCGjh2eKs7p8pzWQdOxCHko37SZqsiEHVhwqHfHogmtsGZ_2aa0wLb0XN2eutNhHFWcQKdmR0MzVSOQeund-qVqCj5lfShJsBMxIv8EXaeb_8qLi5aJSfmQ6D1ILX3NrABIjaULR9Th3NAZ7q15agJoisSALV8ylh_5Xp4mbhKdw1Ucd-Py4jdHXTLJ2ARSEEU4Tmc9kaAw' },
+                { category: 'travel', label: 'CREATIVE', title: 'Last Outpost', location: 'Digital Art Concept',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB9CzmPeToC50hHNOlA1MVPJ2RJHtHOYOFSwUNBVSKmXc-8kxqKSF3cRDEC1njO-tU5UTK8EMqScGkRydiO3Td4OF7qdNKW1-yWLL4mlazVCC12AmPslcvpCBWLRjePCIh5iHpJdeHpaXOhsa0Y4hUXR53iU1qRc2jiUysvqc22uAElUlkkbWKXfoEumaE45EFsYJeGriKpGQFCo7cUIjuV0wCJAfxV5t0EcV2IADPAb68oGXWXGyOp4BMlV2jtIVCfz9X6G2tXLg' }
+            ];
+
+            // ─── Load data from localStorage or use default ────
+            let galleryData = [];
+
+            function loadGalleryData() {
+                try {
+                    const stored = localStorage.getItem(STORAGE_KEY);
+                    if (stored) {
+                        const parsed = JSON.parse(stored);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            galleryData = parsed;
+                            return;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Failed to load from localStorage:', e);
+                }
+                galleryData = JSON.parse(JSON.stringify(defaultGalleryData));
+                saveGalleryData();
+            }
+
+            function saveGalleryData() {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(galleryData));
+                } catch (e) {
+                    console.warn('Failed to save to localStorage:', e);
+                }
+            }
+
+            loadGalleryData();
+
+            // ─── DOM refs ──────────────────────────────────────
+            const galleryGrid = document.getElementById('galleryGrid');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lbTitle = document.getElementById('lbTitle');
+            const lbCategory = document.getElementById('lbCategory');
+            const lbLocation = document.getElementById('lbLocation');
+            const lbCounter = document.getElementById('lbCounter');
+            const lbClose = document.getElementById('lightboxClose');
+            const lbPrev = document.getElementById('lightboxPrev');
+            const lbNext = document.getElementById('lightboxNext');
+
+            // Sidebar
+            const sidebar = document.getElementById('mobileSidebar');
+            const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+            const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const sidebarNavLinks = sidebar.querySelectorAll('.sidebar-nav a');
+
+            const header = document.getElementById('mainHeader');
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            const toast = document.getElementById('toast');
+
+            // ─── Modals ──────────────────────────────────────
+            const signInModal = document.getElementById('signInModal');
+            const signInClose = document.getElementById('signInClose');
+            const signInForm = document.getElementById('signInForm');
+            const signInEmail = document.getElementById('signInEmail');
+            const signInPassword = document.getElementById('signInPassword');
+            const signInEmailError = document.getElementById('signInEmailError');
+            const signInPassError = document.getElementById('signInPassError');
+
+            const uploadModal = document.getElementById('uploadModal');
+            const uploadClose = document.getElementById('uploadClose');
+            const uploadForm = document.getElementById('uploadForm');
+            const fileInput = document.getElementById('fileInput');
+            const fileDropZone = document.getElementById('fileDropZone');
+            const filePlaceholder = document.getElementById('filePlaceholder');
+            const filePreview = document.getElementById('filePreview');
+            const filePreviewImg = document.getElementById('filePreviewImg');
+            const filePreviewName = document.getElementById('filePreviewName');
+            const fileRemoveBtn = document.getElementById('fileRemoveBtn');
+            const uploadTitle = document.getElementById('uploadTitle');
+            const uploadDesc = document.getElementById('uploadDesc');
+            const uploadCategory = document.getElementById('uploadCategory');
+            const uploadLocation = document.getElementById('uploadLocation');
+            const fileError = document.getElementById('fileError');
+            const titleError = document.getElementById('titleError');
+            const categoryError = document.getElementById('categoryError');
+
+            // ─── Buttons ─────────────────────────────────────
+            const desktopUploadBtn = document.getElementById('desktopUploadBtn');
+            const desktopSignInBtn = document.getElementById('desktopSignInBtn');
+            const sidebarUploadBtn = document.getElementById('sidebarUploadBtn');
+            const sidebarSignInBtn = document.getElementById('sidebarSignInBtn');
+            const mobileCtaUploadBtn = document.getElementById('mobileCtaUploadBtn');
+            const heroExploreBtn = document.getElementById('heroExploreBtn');
+            const heroCollectionsBtn = document.getElementById('heroCollectionsBtn');
+            const logoLink = document.getElementById('logoLink');
+
+            // ─── Toast helper ────────────────────────────────
+            let toastTimeout = null;
+
+            function showToast(message, type = 'info', duration = 3500) {
+                if (toastTimeout) clearTimeout(toastTimeout);
+                toast.textContent = message;
+                toast.className = 'toast ' + type;
+                void toast.offsetWidth;
+                toast.classList.add('show');
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                    toastTimeout = null;
+                }, duration);
+            }
+
+            // ─── Modal helpers ──────────────────────────────
+            function openModal(modal) {
+                modal.classList.remove('hidden-modal');
+                document.body.style.overflow = 'hidden';
+                const firstInput = modal.querySelector('input:not([type="file"]), select, textarea');
+                if (firstInput) setTimeout(() => firstInput.focus(), 100);
+            }
+
+            function closeModal(modal) {
+                modal.classList.add('hidden-modal');
+                document.body.style.overflow = '';
+            }
+
+            function closeAllModals() {
+                closeModal(signInModal);
+                closeModal(uploadModal);
+            }
+
+            let overflowCounter = 0;
+
+            function lockScroll() {
+                overflowCounter++;
+                if (overflowCounter === 1) {
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function unlockScroll() {
+                overflowCounter--;
+                if (overflowCounter <= 0) {
+                    overflowCounter = 0;
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // ─── Sign In ──────────────────────────────────────
+            function openSignIn() { openModal(signInModal);
+                resetSignInErrors(); }
+
+            function closeSignIn() { closeModal(signInModal); }
+
+            function resetSignInErrors() {
+                signInEmailError.classList.add('hidden');
+                signInPassError.classList.add('hidden');
+                signInEmail.classList.remove('border-error');
+                signInPassword.classList.remove('border-error');
+            }
+
+            signInClose.addEventListener('click', closeSignIn);
+            signInModal.addEventListener('click', function(e) {
+                if (e.target === this) closeSignIn();
+            });
+
+            signInForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                resetSignInErrors();
+                let valid = true;
+                const email = signInEmail.value.trim();
+                const pass = signInPassword.value.trim();
+                if (!email || !email.includes('@') || !email.includes('.')) {
+                    signInEmailError.classList.remove('hidden');
+                    signInEmail.classList.add('border-error');
+                    valid = false;
+                }
+                if (!pass || pass.length < 6) {
+                    signInPassError.classList.remove('hidden');
+                    signInPassword.classList.add('border-error');
+                    valid = false;
+                }
+                if (!valid) return;
+
+                const btn = signInForm.querySelector('button[type="submit"]');
+                const orig = btn.innerHTML;
+                btn.innerHTML =
+                    '<span class="flex items-center justify-center gap-2"><span class="material-symbols-outlined animate-spin text-xl">refresh</span> Signing in...</span>';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    btn.innerHTML = orig;
+                    btn.disabled = false;
+                    closeSignIn();
+                    showToast('🎉 Welcome back, ' + (email.split('@')[0] || 'Photographer') + '!',
+                    'success');
+                }, 1400);
+            });
+
+            // ─── Upload ──────────────────────────────────────
+            let selectedFile = null;
+            let uploadedImageSrc = null;
+
+            function openUpload() {
+                resetUploadErrors();
+                uploadTitle.value = '';
+                uploadDesc.value = '';
+                uploadCategory.value = '';
+                uploadLocation.value = '';
+                selectedFile = null;
+                uploadedImageSrc = null;
+                fileInput.value = '';
+                filePlaceholder.classList.remove('hidden');
+                filePreview.classList.add('hidden');
+                filePreviewImg.src = '';
+                filePreviewName.textContent = '';
+                openModal(uploadModal);
+                setTimeout(() => uploadTitle.focus(), 200);
+            }
+
+            function closeUpload() { closeModal(uploadModal); }
+
+            function resetUploadErrors() {
+                fileError.classList.add('hidden');
+                titleError.classList.add('hidden');
+                categoryError.classList.add('hidden');
+                uploadTitle.classList.remove('border-error');
+                uploadCategory.classList.remove('border-error');
+            }
+
+            uploadClose.addEventListener('click', closeUpload);
+            uploadModal.addEventListener('click', function(e) {
+                if (e.target === this) closeUpload();
+            });
+
+            fileDropZone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+            fileDropZone.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+            });
+            fileDropZone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                if (e.dataTransfer.files.length) {
+                    handleFile(e.dataTransfer.files[0]);
+                }
+            });
+
+            fileInput.addEventListener('change', function() {
+                if (this.files.length) {
+                    handleFile(this.files[0]);
+                }
+            });
+
+            function handleFile(file) {
+                if (!file.type.startsWith('image/')) {
+                    showToast('⚠️ Please select an image file (PNG, JPG, WEBP).', 'error');
+                    return;
+                }
+                if (file.size > 20 * 1024 * 1024) {
+                    showToast('⚠️ File is too large. Maximum size is 20MB.', 'error');
+                    return;
+                }
+                selectedFile = file;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImageSrc = e.target.result;
+                    filePreviewImg.src = uploadedImageSrc;
+                    filePreviewName.textContent = file.name + ' (' + (file.size / 1024 / 1024).toFixed(1) +
+                        ' MB)';
+                    filePlaceholder.classList.add('hidden');
+                    filePreview.classList.remove('hidden');
+                    fileError.classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+
+            fileRemoveBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                selectedFile = null;
+                uploadedImageSrc = null;
+                fileInput.value = '';
+                filePlaceholder.classList.remove('hidden');
+                filePreview.classList.add('hidden');
+                filePreviewImg.src = '';
+                filePreviewName.textContent = '';
+            });
+
+            // ─── Upload form submit ──────────────────────────
+            uploadForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                resetUploadErrors();
+                let valid = true;
+
+                if (!selectedFile || !uploadedImageSrc) {
+                    fileError.classList.remove('hidden');
+                    valid = false;
+                }
+                const title = uploadTitle.value.trim();
+                if (!title) {
+                    titleError.classList.remove('hidden');
+                    uploadTitle.classList.add('border-error');
+                    valid = false;
+                }
+                const cat = uploadCategory.value;
+                if (!cat) {
+                    categoryError.classList.remove('hidden');
+                    uploadCategory.classList.add('border-error');
+                    valid = false;
+                }
+
+                if (!valid) return;
+
+                const btn = uploadForm.querySelector('button[type="submit"]');
+                const orig = btn.innerHTML;
+                btn.innerHTML =
+                    '<span class="flex items-center justify-center gap-2"><span class="material-symbols-outlined animate-spin text-xl">refresh</span> Publishing...</span>';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    btn.innerHTML = orig;
+                    btn.disabled = false;
+
+                    const categoryMap = {
+                        nature: 'NATURE',
+                        animals: 'WILDLIFE',
+                        cities: 'URBAN',
+                        travel: 'TRAVEL'
+                    };
+                    const catLabel = categoryMap[cat] || cat.toUpperCase();
+                    const loc = uploadLocation.value.trim() || 'Unknown Location';
+
+                    // Add to data
+                    const newItem = {
+                        category: cat,
+                        label: catLabel,
+                        title: title,
+                        location: loc,
+                        img: uploadedImageSrc
+                    };
+                    galleryData.unshift(newItem);
+                    saveGalleryData();
+
+                    // Re-render gallery
+                    renderGallery();
+
+                    closeUpload();
+                    showToast('📸 "' + title + '" published to the gallery!', 'success');
+                }, 1600);
+            });
+
+            // ─── Render Gallery ──────────────────────────────
+            let currentIndex = 0;
+            let currentFilter = 'all';
+
+            function renderGallery() {
+                const filter = currentFilter;
+                let html = '';
+                let visibleIndices = [];
+
+                galleryData.forEach((item, idx) => {
+                    const cat = item.category;
+                    if (filter === 'all' || cat === filter) {
+                        visibleIndices.push(idx);
+                        html += `
+                            <div class="group relative overflow-hidden rounded-2xl bg-surface-container hover-lift h-[400px] md:h-[450px] reveal-card" data-category="${cat}" data-index="${idx}">
+                                <div class="absolute inset-0">
+                                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="${item.img}" alt="${item.title}" loading="lazy" />
+                                </div>
+                                <div class="absolute inset-0 image-card-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 md:p-6">
+                                    <span class="text-primary font-label-caps text-label-caps mb-1">${item.label}</span>
+                                    <h3 class="font-title-md text-title-md text-on-surface mb-0.5">${item.title}</h3>
+                                    <p class="font-body-sm text-body-sm text-on-surface-variant">${item.location}</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                galleryGrid.innerHTML = html || `<div class="col-span-full text-center py-12 text-on-surface-variant">No images found in this category.</div>`;
+
+                // Attach click events to cards
+                const cards = galleryGrid.querySelectorAll('.reveal-card');
+                cards.forEach((card) => {
+                    const idx = parseInt(card.dataset.index);
+                    card.addEventListener('click', function(e) {
+                        if (e.target.closest('.image-card-gradient, .absolute')) return;
+                        openLightbox(idx);
+                    });
+                    // Trigger reveal animation
+                    observer.observe(card);
+                    setTimeout(() => card.classList.add('visible'), 50);
+                });
+
+                // Update lightbox if open
+                if (!lightbox.classList.contains('hidden-lightbox')) {
+                    if (visibleIndices.length === 0) {
+                        closeLightbox();
+                    } else {
+                        // Check if current index is visible
+                        if (!visibleIndices.includes(currentIndex)) {
+                            openLightbox(visibleIndices[0]);
+                        } else {
+                            updateLightboxCounter();
+                        }
+                    }
+                }
+            }
+
+            // ─── Lightbox ──────────────────────────────────────
+            function updateLightboxCounter() {
+                const total = galleryData.length;
+                if (total > 0 && currentIndex < total) {
+                    lbCounter.textContent = String(currentIndex + 1).padStart(2, '0') + ' / ' + String(total).padStart(2,
+                        '0');
+                }
+            }
+
+            function openLightbox(index) {
+                const data = galleryData[index];
+                if (!data) return;
+                currentIndex = index;
+                lightboxImg.src = data.img;
+                lbTitle.textContent = data.title;
+                lbCategory.textContent = data.label;
+                lbLocation.textContent = data.location;
+                const total = galleryData.length;
+                lbCounter.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+                lightbox.classList.remove('hidden-lightbox');
+                lockScroll();
+            }
+
+            function closeLightbox() {
+                lightbox.classList.add('hidden-lightbox');
+                unlockScroll();
+            }
+
+            function navigateLightbox(delta) {
+                const total = galleryData.length;
+                if (total === 0) return;
+                let newIdx = (currentIndex + delta + total) % total;
+                openLightbox(newIdx);
+            }
+
+            lbClose.addEventListener('click', closeLightbox);
+            lbPrev.addEventListener('click', () => navigateLightbox(-1));
+            lbNext.addEventListener('click', () => navigateLightbox(1));
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                    closeAllModals();
+                    closeSidebar();
+                }
+                if (e.key === 'ArrowLeft' && !lightbox.classList.contains('hidden-lightbox')) navigateLightbox(-1);
+                if (e.key === 'ArrowRight' && !lightbox.classList.contains('hidden-lightbox')) navigateLightbox(1);
+            });
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === this) closeLightbox();
+            });
+
+            // ─── Category filtering ──────────────────────────
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.dataset.filter;
+                    renderGallery();
+                    // Update sidebar active state
+                    sidebarNavLinks.forEach(link => {
+                        link.classList.toggle('active-sidebar', link.dataset.category === currentFilter);
+                    });
+                });
+            });
+
+            // ─── Sidebar ──────────────────────────────────────
+            function openSidebar() {
+                sidebar.classList.add('open');
+                sidebarBackdrop.classList.add('visible');
+                lockScroll();
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                sidebarBackdrop.classList.remove('visible');
+                unlockScroll();
+            }
+
+            function toggleSidebar() {
+                if (sidebar.classList.contains('open')) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleSidebar();
+            });
+
+            sidebarCloseBtn.addEventListener('click', closeSidebar);
+            sidebarBackdrop.addEventListener('click', closeSidebar);
+
+            // Sidebar nav links
+            sidebarNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const cat = this.dataset.category;
+                    // Update filter buttons
+                    filterBtns.forEach(btn => {
+                        if (btn.dataset.filter === cat) {
+                            btn.click();
+                        }
+                    });
+                    // Close sidebar
+                    closeSidebar();
+                    // Scroll to gallery
+                    document.querySelector('#galleryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+
+            // ─── Sidebar Upload & Sign In ─────────────────────
+            sidebarUploadBtn.addEventListener('click', function() {
+                closeSidebar();
+                setTimeout(() => openUpload(), 200);
+            });
+
+            sidebarSignInBtn.addEventListener('click', function() {
+                closeSidebar();
+                setTimeout(() => openSignIn(), 200);
+            });
+
+            // ─── Sticky header ──────────────────────────────
+            let lastScroll = 0;
+            window.addEventListener('scroll', function() {
+                const y = window.scrollY;
+                if (y > 20) {
+                    header.classList.add('py-2', 'shadow-xl');
+                    header.classList.remove('py-3', 'md:py-4', 'shadow-sm');
+                } else {
+                    header.classList.add('py-3', 'md:py-4', 'shadow-sm');
+                    header.classList.remove('py-2', 'shadow-xl');
+                }
+                lastScroll = y;
+            }, { passive: true });
+
+            // ─── Intersection Observer ──────────────────────
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+
+            // ─── Load More ────────────────────────────────────
+            loadMoreBtn.addEventListener('click', function() {
+                const original = this.innerHTML;
+                this.innerHTML =
+                    '<span class="material-symbols-outlined animate-spin">refresh</span> Loading...';
+                this.disabled = true;
+                setTimeout(() => {
+                    this.innerHTML = original;
+                    this.disabled = false;
+                    showToast('✨ All masterpieces are already displayed!', 'info');
+                }, 1200);
+            });
+
+            // ─── Desktop nav filter links ─────────────────────
+            document.querySelectorAll('.desktop-nav-wrap a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const cat = this.dataset.category;
+                    filterBtns.forEach(btn => {
+                        if (btn.dataset.filter === cat) {
+                            btn.click();
+                            document.querySelector('#galleryGrid').scrollIntoView({ behavior: 'smooth',
+                                block: 'start' });
+                        }
+                    });
+                });
+            });
+
+            // ─── Action buttons ──────────────────────────────
+            desktopUploadBtn.addEventListener('click', openUpload);
+            desktopSignInBtn.addEventListener('click', openSignIn);
+            mobileCtaUploadBtn.addEventListener('click', openUpload);
+
+            heroExploreBtn.addEventListener('click', function() {
+                document.querySelector('#galleryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            heroCollectionsBtn.addEventListener('click', function() {
+                document.querySelector('#galleryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => {
+                    showToast('📚 Browse our curated collections below!', 'info');
+                }, 400);
+            });
+
+            logoLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ─── Init ──────────────────────────────────────────
+            renderGallery();
+            document.body.style.overflow = '';
+
+            // ─── Handle sidebar category sync ──────────────
+            // Update sidebar active state when filter changes
+            const filterObserver = new MutationObserver(() => {
+                const activeFilter = document.querySelector('.filter-btn.active');
+                if (activeFilter) {
+                    const cat = activeFilter.dataset.filter;
+                    sidebarNavLinks.forEach(link => {
+                        link.classList.toggle('active-sidebar', link.dataset.category === cat);
+                    });
+                }
+            });
+            filterBtns.forEach(btn => {
+                filterObserver.observe(btn, { attributes: true, attributeFilter: ['class'] });
+            });
+
+            console.log('✨ LUMINA Gallery initialized. ' + galleryData.length + ' items loaded from ' + (localStorage
+                .getItem(STORAGE_KEY) ? 'storage' : 'defaults'));
+
+            // ─── Expose for debugging ──────────────────────
+            window.__LUMINA = {
+                galleryData,
+                openLightbox,
+                closeLightbox,
+                showToast,
+                openUpload,
+                openSignIn,
+                renderGallery,
+                toggleSidebar
+            };
+
+        })();
+    </script>
+
+</body>
+</html>
