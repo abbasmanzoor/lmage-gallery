@@ -131,7 +131,6 @@
             vertical-align: middle;
         }
 
-        /* ── Scrollbar hide (mobile) ── */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -140,7 +139,6 @@
             scrollbar-width: none;
         }
 
-        /* ── Glass effects ── */
         .glass-header {
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -152,7 +150,6 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* ── Shimmer loading ── */
         .shimmer {
             background: linear-gradient(90deg, #1e293b 25%, #2d3449 50%, #1e293b 75%);
             background-size: 200% 100%;
@@ -168,7 +165,6 @@
             }
         }
 
-        /* ── Hover lift ── */
         .hover-lift {
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
         }
@@ -177,12 +173,10 @@
             box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        /* ── Image card gradient overlay ── */
         .image-card-gradient {
             background: linear-gradient(to top, rgba(11, 19, 38, 0.92) 0%, rgba(11, 19, 38, 0) 55%);
         }
 
-        /* ── Lightbox transitions ── */
         #lightbox {
             transition: opacity 0.4s ease, visibility 0.4s ease;
         }
@@ -192,7 +186,6 @@
             pointer-events: none;
         }
 
-        /* ── Mobile Sidebar ── */
         #mobileSidebar {
             position: fixed;
             top: 0;
@@ -214,7 +207,6 @@
             transform: translateX(0);
         }
 
-        /* Sidebar backdrop */
         #sidebarBackdrop {
             position: fixed;
             inset: 0;
@@ -229,7 +221,6 @@
             visibility: visible;
         }
 
-        /* ── Sidebar styles ── */
         .sidebar-logo {
             font-size: 1.75rem;
             font-weight: 700;
@@ -310,7 +301,6 @@
             color: #fff;
         }
 
-        /* ── Desktop nav links ── */
         .desktop-nav-link {
             font-weight: 500;
             transition: color 0.2s ease;
@@ -320,7 +310,6 @@
             color: #f97316;
         }
 
-        /* ── Image reveal on scroll ── */
         .reveal-card {
             opacity: 0;
             transform: translateY(24px);
@@ -331,7 +320,6 @@
             transform: translateY(0);
         }
 
-        /* ── Active filter ── */
         .filter-btn.active {
             background-color: #f97316;
             color: #582200;
@@ -342,7 +330,6 @@
             color: #582200;
         }
 
-        /* ── Modal transitions ── */
         .modal-overlay {
             transition: opacity 0.35s ease, visibility 0.35s ease;
             pointer-events: none;
@@ -364,7 +351,6 @@
             transform: scale(1) translateY(0);
         }
 
-        /* ── File input styling ── */
         .file-drop-zone {
             border: 2px dashed rgba(255, 255, 255, 0.15);
             transition: border-color 0.3s ease, background 0.3s ease;
@@ -380,7 +366,6 @@
             object-fit: cover;
         }
 
-        /* ── Form input styling ── */
         .form-input {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -431,7 +416,6 @@
             color: #dae2fd;
         }
 
-        /* ── Toast notification ── */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -470,48 +454,108 @@
             border-left: 4px solid #f97316;
         }
 
-        /* ── Responsive tweaks ── */
-        @media (max-width: 768px) {
-            .display-lg {
-                font-size: 32px !important;
+        .mobile-search-wrap {
+            position: relative;
+            display: none;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            padding: 0 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+        .mobile-search-wrap:focus-within {
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+        }
+        .mobile-search-wrap .search-icon {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 1.2rem;
+        }
+        .mobile-search-wrap input {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 0.6rem;
+            color: #dae2fd;
+            font-family: 'Geist', sans-serif;
+            font-size: 0.9rem;
+            width: 120px;
+            outline: none;
+        }
+        .mobile-search-wrap input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+        .mobile-search-wrap .clear-search {
+            color: rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.2rem;
+            transition: color 0.2s ease;
+            background: none;
+            border: none;
+            display: none;
+        }
+        .mobile-search-wrap .clear-search:hover {
+            color: #ffb4ab;
+        }
+
+        @media (max-width: 767px) {
+            .desktop-nav-wrap {
+                display: none !important;
             }
-            .headline-lg {
-                font-size: 24px !important;
+            .desktop-actions-wrap {
+                display: none !important;
             }
-            .toast {
-                white-space: normal;
-                padding: 0.8rem 1.2rem;
-                bottom: 1.2rem;
-                font-size: 0.85rem;
-                max-width: 92vw;
+            .mobile-actions-wrap {
+                display: flex !important;
             }
-            .modal-box {
-                padding: 1.5rem !important;
-                margin: 0.5rem;
-                max-height: 98vh;
+            .mobile-search-wrap {
+                display: flex !important;
             }
-            .form-input {
-                font-size: 16px !important;
-                padding: 0.7rem 0.9rem;
+            .mobile-search-wrap input {
+                width: 80px;
+            }
+        }
+        @media (min-width: 768px) {
+            .desktop-nav-wrap {
+                display: flex !important;
+            }
+            .desktop-actions-wrap {
+                display: flex !important;
+            }
+            .mobile-actions-wrap {
+                display: none !important;
+            }
+            .mobile-search-wrap {
+                display: none !important;
             }
             #mobileSidebar {
-                padding: 1.25rem 1rem;
+                display: none !important;
             }
-            .sidebar-logo {
-                font-size: 1.5rem;
-                padding-bottom: 1rem;
-                margin-bottom: 1rem;
-            }
-            .sidebar-nav a {
-                font-size: 0.95rem;
-                padding: 0.6rem 0.85rem;
+            #sidebarBackdrop {
+                display: none !important;
             }
         }
 
         @media (max-width: 480px) {
-            .display-lg {
-                font-size: 28px !important;
+            .mobile-search-wrap input {
+                width: 60px;
+                font-size: 0.8rem;
             }
+            .mobile-search-wrap .search-icon {
+                font-size: 1rem;
+            }
+        }
+
+        #mobileSidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        #mobileSidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #mobileSidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
         }
 
         .modal-overlay:not(.hidden-modal) .modal-box input,
@@ -525,68 +569,41 @@
             padding: 8px 12px;
         }
 
-        /* ── Hide desktop nav on mobile ── */
-        @media (max-width: 767px) {
-            .desktop-nav-wrap {
-                display: none !important;
-            }
-            .desktop-actions-wrap {
-                display: none !important;
-            }
-            .mobile-actions-wrap {
-                display: flex !important;
-            }
+        /* ── Image error fallback ── */
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
         }
-        @media (min-width: 768px) {
-            .desktop-nav-wrap {
-                display: flex !important;
-            }
-            .desktop-actions-wrap {
-                display: flex !important;
-            }
-            .mobile-actions-wrap {
-                display: none !important;
-            }
-            #mobileSidebar {
-                display: none !important;
-            }
-            #sidebarBackdrop {
-                display: none !important;
-            }
+        .gallery-img-error {
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 0.9rem;
         }
-
-        /* ── Sidebar scroll styling ── */
-        #mobileSidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-        #mobileSidebar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        #mobileSidebar::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
+        .gallery-img-error .material-symbols-outlined {
+            font-size: 3rem;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- ════════════════════════════════════════════════════════ -->
-    <!--  TOAST NOTIFICATION                                    -->
-    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- Toast Notification -->
     <div id="toast" class="toast"></div>
 
-    <!-- ════════════════════════════════════════════════════════ -->
-    <!--  HEADER  (fixed, glass)                               -->
-    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- ============================================================ -->
+    <!-- HEADER                                                        -->
+    <!-- ============================================================ -->
     <header id="mainHeader" class="fixed top-0 w-full z-50 bg-surface-container/80 glass-header shadow-sm transition-all duration-300 ease-out">
         <div class="flex justify-between items-center px-4 md:px-margin-desktop py-3 md:py-4 max-w-container-max mx-auto">
-            <!-- Logo -->
             <a href="#" id="logoLink" class="font-display-lg text-headline-lg-mobile md:text-headline-lg tracking-tighter text-primary-container dark:text-primary hover:opacity-80 transition-opacity">
                 LUMINA
             </a>
 
-            <!-- Desktop Nav -->
             <nav class="desktop-nav-wrap hidden md:flex items-center gap-stack-lg">
                 <a class="desktop-nav-link font-title-md text-title-md text-on-surface-variant hover:text-primary-container" data-category="nature">Nature</a>
                 <a class="desktop-nav-link font-title-md text-title-md text-on-surface-variant hover:text-primary-container" data-category="animals">Animals</a>
@@ -594,17 +611,19 @@
                 <a class="desktop-nav-link font-title-md text-title-md text-on-surface-variant hover:text-primary-container" data-category="travel">Travel</a>
             </nav>
 
-            <!-- Desktop Actions -->
             <div class="desktop-actions-wrap hidden md:flex items-center gap-gutter">
                 <button id="desktopUploadBtn" class="font-title-md text-title-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Upload</button>
                 <button id="desktopSignInBtn" class="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-title-md text-title-md hover:brightness-110 transition-all shadow-lg shadow-primary-container/20 cursor-pointer">Sign In</button>
             </div>
 
-            <!-- Mobile Actions -->
-            <div class="mobile-actions-wrap flex md:hidden items-center gap-3">
-                <button class="p-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer" aria-label="Search">
-                    <span class="material-symbols-outlined">search</span>
-                </button>
+            <div class="mobile-actions-wrap flex md:hidden items-center gap-2">
+                <div class="mobile-search-wrap">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input type="text" id="mobileSearchInput" placeholder="Search..." aria-label="Search gallery" />
+                    <button id="mobileSearchClear" class="clear-search" aria-label="Clear search">
+                        <span class="material-symbols-outlined" style="font-size:1rem;">close</span>
+                    </button>
+                </div>
                 <button id="mobileMenuBtn" class="p-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer" aria-label="Toggle menu">
                     <span class="material-symbols-outlined text-2xl">menu</span>
                 </button>
@@ -612,26 +631,22 @@
         </div>
     </header>
 
-    <!-- ════════════════════════════════════════════════════════ -->
-    <!--  MOBILE SIDEBAR (slide-in from left)                   -->
-    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- ============================================================ -->
+    <!-- MOBILE SIDEBAR                                                -->
+    <!-- ============================================================ -->
     <div id="sidebarBackdrop"></div>
-
     <aside id="mobileSidebar" role="navigation" aria-label="Mobile navigation">
         <button id="sidebarCloseBtn" class="sidebar-close" aria-label="Close menu">
             <span class="material-symbols-outlined">close</span>
         </button>
-
         <div class="sidebar-logo">LUMINA</div>
-
         <nav class="sidebar-nav">
-            <a data-category="nature" class="active-sidebar">🌿 Nature</a>
+            <a data-category="all" class="active-sidebar">✨ All</a>
+            <a data-category="nature">🌿 Nature</a>
             <a data-category="animals">🐾 Animals</a>
             <a data-category="cities">🏙️ Cities</a>
             <a data-category="travel">✈️ Travel</a>
-            <a data-category="all" style="margin-top:0.5rem;border-top:1px solid rgba(255,255,255,0.05);padding-top:0.75rem;">✨ All</a>
         </nav>
-
         <div class="sidebar-actions">
             <button id="sidebarUploadBtn" class="btn-upload">
                 <span class="material-symbols-outlined" style="font-size:1.2rem;vertical-align:middle;">cloud_upload</span>
@@ -644,9 +659,9 @@
         </div>
     </aside>
 
-    <!-- ════════════════════════════════════════════════════════ -->
-    <!--  SIGN IN MODAL                                         -->
-    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- ============================================================ -->
+    <!-- SIGN IN MODAL                                                 -->
+    <!-- ============================================================ -->
     <div id="signInModal" class="modal-overlay hidden-modal fixed inset-0 z-[80] flex items-center justify-center bg-surface-container-lowest/90 backdrop-blur-md p-4">
         <div class="modal-box w-full max-w-md bg-surface-container-high rounded-2xl border border-outline-variant/20 shadow-2xl p-6 md:p-8 relative">
             <button id="signInClose" class="absolute top-4 right-4 p-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
@@ -688,9 +703,9 @@
         </div>
     </div>
 
-    <!-- ════════════════════════════════════════════════════════ -->
-    <!--  UPLOAD MODAL                                          -->
-    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- ============================================================ -->
+    <!-- UPLOAD MODAL                                                  -->
+    <!-- ============================================================ -->
     <div id="uploadModal" class="modal-overlay hidden-modal fixed inset-0 z-[80] flex items-center justify-center bg-surface-container-lowest/90 backdrop-blur-md p-3 md:p-4">
         <div class="modal-box w-full max-w-lg bg-surface-container-high rounded-2xl border border-outline-variant/20 shadow-2xl p-5 md:p-8 relative max-h-[98vh] overflow-y-auto">
             <button id="uploadClose" class="absolute top-4 right-4 p-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer z-10">
@@ -704,7 +719,6 @@
                 <p class="text-on-surface-variant text-body-sm mt-1">Share your photography with the Lumina community</p>
             </div>
             <form id="uploadForm" class="space-y-5" novalidate>
-                <!-- File Drop Zone -->
                 <div>
                     <label class="form-label">Image File <span class="required-star">*</span></label>
                     <div id="fileDropZone" class="file-drop-zone relative rounded-xl p-6 text-center cursor-pointer transition-all">
@@ -723,20 +737,17 @@
                     <span id="fileError" class="text-error text-xs mt-1 hidden">Please select an image file</span>
                 </div>
 
-                <!-- Title -->
                 <div>
                     <label class="form-label" for="uploadTitle">Title <span class="required-star">*</span></label>
                     <input id="uploadTitle" type="text" class="form-input" placeholder="e.g. 'Golden Hour Serenity'" required autofocus />
                     <span id="titleError" class="text-error text-xs mt-1 hidden">Title is required</span>
                 </div>
 
-                <!-- Description -->
                 <div>
                     <label class="form-label" for="uploadDesc">Description</label>
                     <textarea id="uploadDesc" rows="2" class="form-input resize-none" placeholder="Tell the story behind this image..."></textarea>
                 </div>
 
-                <!-- Category -->
                 <div>
                     <label class="form-label" for="uploadCategory">Category <span class="required-star">*</span></label>
                     <select id="uploadCategory" class="form-input form-select" required>
@@ -749,7 +760,6 @@
                     <span id="categoryError" class="text-error text-xs mt-1 hidden">Please select a category</span>
                 </div>
 
-                <!-- Location -->
                 <div>
                     <label class="form-label" for="uploadLocation">Location</label>
                     <input id="uploadLocation" type="text" class="form-input" placeholder="e.g. 'Yosemite, CA'" />
@@ -765,16 +775,14 @@
         </div>
     </div>
 
-    <!-- ════════════════════════════════════════════════════════ -->
-    <!--  MAIN CONTENT                                         -->
-    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- ============================================================ -->
+    <!-- MAIN CONTENT                                                 -->
+    <!-- ============================================================ -->
     <main class="pt-20 md:pt-32 pb-8">
 
         <!-- ─── HERO ─── -->
         <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-12 md:mb-24 relative">
             <div class="grid grid-cols-12 gap-gutter items-center">
-
-                <!-- Hero Text -->
                 <div class="col-span-12 md:col-span-7">
                     <h1 class="font-display-lg text-display-lg mb-stack-md text-on-surface">
                         Image Gallery
@@ -794,17 +802,16 @@
                     </div>
                 </div>
 
-                <!-- Hero Images (desktop only) -->
                 <div class="hidden md:block col-span-5 relative h-[400px]">
                     <div class="absolute inset-0 rounded-3xl overflow-hidden shimmer shadow-2xl rotate-3">
                         <img class="w-full h-full object-cover opacity-80"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBILtjL6UxYZbcKHxJ7sI2_w_dzEmil2GNigQ66aVjfMRq8iGeQYndRVtQhQ9mrzHO4ZVzKi_DCKMGOmZb37trQx-dH-w9n77r82-PMXhkUrWRtbgYyQMsU5JWHsKjG83epnekGGOP9SM3an16jpMFIrIUvWKhYv89INBVL1I-4se4OqbJ7bbu0n_T0Qgfxz0DbIShldBlDDWiPch_qzPEZPAZFV-SlVEvvwigDIw7yonfDRuZoaUtvRU1-oQYhTfu9KiNTCka17g"
-                        alt="Cinematic camera lens reflecting neon city" />
+                        alt="Cinematic camera lens" />
                     </div>
                     <div class="absolute inset-4 -left-12 -bottom-8 rounded-3xl overflow-hidden shimmer shadow-2xl -rotate-6 border-4 border-surface-container">
                         <img class="w-full h-full object-cover"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuASkYSRDCWzCgKIXKU3PBa2ObCe7aGa9jLxYBLd3DzFw94FOtdfIzqWAyLoKMZDP6KqxB4v_aSSqKV3jrh65XkCx3-mpTvDECXzLKOUI0cAlhmcU3qZkJLeYyW7yOBkAABN3DUvF2OPRRUWZY5wjmAaSApMsuIz85aBl8zNLgpP3KAX2C_ASLfR86mH8BfrXL6hn-lo2dzqR13Ft5YW2fGs_V-p8LyUyBu2-2Tli0tPRYmhQ630_YJS0QYanYZqne5YVSRKpcsldw"
-                        alt="Misty mountain range at sunrise" />
+                        alt="Misty mountain range" />
                     </div>
                 </div>
             </div>
@@ -823,11 +830,7 @@
 
         <!-- ─── IMAGE GRID ─── -->
         <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-            <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-gutter">
-                <!-- Cards will be rendered by JavaScript -->
-            </div>
-
-            <!-- Load More -->
+            <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-gutter"></div>
             <div class="mt-stack-lg flex justify-center">
                 <button id="loadMoreBtn" class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md py-4 cursor-pointer">
                     <span class="material-symbols-outlined">expand_more</span>
@@ -850,9 +853,9 @@
 
     </main>
 
-    <!-- ════════════════════════════════════════════════════════ -->
-    <!--  FOOTER                                               -->
-    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- ============================================================ -->
+    <!-- FOOTER                                                        -->
+    <!-- ============================================================ -->
     <footer class="w-full py-stack-lg bg-surface-container-lowest dark:bg-surface-container-lowest mt-8 md:mt-0">
         <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-gutter max-w-container-max mx-auto">
             <div class="flex flex-col items-center md:items-start gap-2">
@@ -876,25 +879,19 @@
         </div>
     </footer>
 
-    <!-- ════════════════════════════════════════════════════════ -->
-    <!--  LIGHTBOX OVERLAY                                     -->
-    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- ============================================================ -->
+    <!-- LIGHTBOX                                                      -->
+    <!-- ============================================================ -->
     <div id="lightbox" class="fixed inset-0 z-[75] flex items-center justify-center bg-surface-container-lowest/95 backdrop-blur-xl hidden-lightbox">
-
         <button id="lightboxClose" class="absolute top-4 md:top-8 right-4 md:right-margin-desktop z-[80] text-on-surface hover:text-primary transition-colors group cursor-pointer">
             <span class="material-symbols-outlined text-3xl md:text-4xl">close</span>
         </button>
-
         <button id="lightboxPrev" class="absolute left-2 md:left-margin-desktop top-1/2 -translate-y-1/2 z-[80] p-3 md:p-4 rounded-full bg-surface-container-high/40 hover:bg-surface-container-high text-on-surface transition-all group cursor-pointer">
             <span class="material-symbols-outlined text-2xl md:text-4xl">chevron_left</span>
         </button>
-
         <div class="relative w-full h-full max-w-[92vw] md:max-w-[85vw] max-h-[80vh] md:max-h-[819px] flex flex-col items-center justify-center gap-3 md:gap-stack-md px-4 md:px-10">
             <div class="relative w-full h-full flex items-center justify-center group/img">
-                <img id="lightboxImg" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-transform duration-500 hover:scale-[1.01]"
-                src=""
-                alt="Lightbox view" />
-
+                <img id="lightboxImg" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-transform duration-500 hover:scale-[1.01]" src="" alt="Lightbox view" />
                 <div id="lightboxMeta" class="absolute bottom-0 left-0 right-0 p-4 md:p-stack-lg bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 rounded-b-lg">
                     <div class="flex flex-wrap justify-between items-end gap-2">
                         <div>
@@ -913,52 +910,61 @@
                     </div>
                 </div>
             </div>
-
             <div id="lbCounter" class="font-label-caps text-on-surface-variant tracking-widest text-xs md:text-sm">
                 01 <span class="mx-1 md:mx-2 text-outline">/</span> 09
             </div>
         </div>
-
         <button id="lightboxNext" class="absolute right-2 md:right-margin-desktop top-1/2 -translate-y-1/2 z-[80] p-3 md:p-4 rounded-full bg-surface-container-high/40 hover:bg-surface-container-high text-on-surface transition-all group cursor-pointer">
             <span class="material-symbols-outlined text-2xl md:text-4xl">chevron_right</span>
         </button>
     </div>
 
-
-    <!-- ════════════════════════════════════════════════════════ -->
-    <!--  JAVASCRIPT                                            -->
-    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT                                                    -->
+    <!-- ============================================================ -->
     <script>
         (function() {
             'use strict';
 
-            // ─── STORAGE KEY ───────────────────────────────────
             const STORAGE_KEY = 'lumina_gallery_data';
 
-            // ─── Default gallery data ──────────────────────────
-            const defaultGalleryData = [
-                { category: 'cities', label: 'ARCHITECTURAL', title: 'Silent Curves', location: 'Helsinki, Finland',
-                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCTo2UbXkLZLGXE_J5L_VnwfcJQIZFLxtIbDAp2XkCZtSoQsNYSG1mWkgHPqL_1KSDNG5MEJFdC5L-CnfB14pXbwslNeamVdO5rLmpgQ-OXS_ivjK5N6kAFiMa6Tswif8H3vj1SgO6kRUrKHv4AuH8-f2AfGgpXu7LUEvsOASxXpZ21TcsmSHkaztDgvn4O7GQ-MtK1arl4g1vFMr7s8LXGEIcazrhmWm3uzyjPGXYO4L-6fZBIXYskpi7sbwieUG8gdDKnkUPhww' },
-                { category: 'animals', label: 'WILDLIFE', title: 'Amber Watch', location: 'Bengal Tiger',
-                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFsi3rRtncZSNqxBBsuTuEeJNnvj4azEttH_YsC3JOqrHNg1FM25Nssu9NwAwuRw6Nfgs-BDaf5C11tW0Oj82y2vMcMEJZ0YesC48U9993bwc4NPrbFqLUVaSjRYFCZ4YAqHDkGYoHXcazfRA7MzY70rR_S46CD3f0tK6wdRfh1ufdyr3aTfMtGDMIEq7QKkdfhnauAve4Cb08D0xGo0bzc8SwBRSPtA3NOKiivoDMfBIH8onQO_HPs6xvIVzQKkYWFh-AJiTj7g' },
-                { category: 'cities', label: 'URBAN', title: 'Electric Arteries', location: 'Shinjuku, Japan',
-                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAWtx5MRH-wr7aKEHbDm5ZpDy_fhylJvHoZJU5FbNtE3ypeGIUI__weuGZtIeOEWFH6RClyGT8mK-wB0lLkQ3upaQc45w9dQMxyTk3QZtE5kONXehkknk44kK-KYRlZdM5PgCuWYeafiPkNgNlR39B3B_j1TLmRbXg7mHbZ3Y52doZlVjRGVf3JIO9xT9-jWFtR5hTt-cPdFYHgS6FyAJMiqji19ioCsj4Z8bqh9ntnO09us3m2F8kIAeiSCdmhgVDVbEhgK-9Dzg' },
-                { category: 'nature', label: 'NATURE', title: 'Glacial Echo', location: 'Alberta, Canada',
-                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqNLjCevuKPybi4EnvHIVdcmrMwe7uNj-kl5Pe8z-KNlnBc6eN0czSLetjJzJcw7tZ5aGNTN3xeiFUcQ_Y3_UBigblOG0s0XS3anGDzgday7xKQBW8S9ZJikBtY-hWxu6R689FB7aoMLnGatA0fFo74-ywzjVleFZdqytxhJ3uTy-EAgt-tAc5MfDxOPsfaaJYIOkKpNcw-HlnoV1_l5ExjFuCWMqEOgWzjuvZc0jwP-bP1A3B1Qub9MPqyRStAnlaWRWS6evAbg' },
-                { category: 'travel', label: 'TRAVEL', title: 'The Weaver', location: 'Marrakech, Morocco',
-                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnnyzagNFZBQFC5JY5yN4gDFX0YfmzgvSDZnDD0YLGYhSGJKuwnIAWWHf_QVhvXsYXRYED6tBcZb5IPjjiBJ8DC3Krv0kam5TxTgTTtHTNGgeM_HZDtiUwLlYXbbSGyZQVRzy9MMhrZd5I-DiAg2qIi9gR5ErsMzFGbV9-0wsLJSG-KVNGTTA0mvEA8BhMfwJRn_b_M9VmQNPfBpcg9wEkyVS5Q1Hl7KVfrVQC9T8IxVA9bimgg_BeXlyzDBe_m747boA6QG2OQQ' },
-                { category: 'travel', label: 'AUTOMOTIVE', title: 'Edge of Horizon', location: 'Amalfi Coast, Italy',
-                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD0MKIA9vTH078Wpb1_af-uPCX7P8QB0R6Yc1NEOrbrELTOAcRh8FLJjQN0pVUQNIBZHnQbqpM5wXMMAfN6W13q0gS9yLKwlt5Uhd-jKyzshfa5S5ONdO3n5UqMwBCDyt8RsftKOZgEo_6eji3lJt8axcNHH0-sRKnjrgfG2DwTVNXmfneA0J9-HMjGJj0ntc7eZbeP7U6fKPpxasfauTi3cPvtMJ5M-nEsmBaW87QAkpU5rdcnGJAjK4TVH1gCa7dA50BB2RwziA' },
-                { category: 'nature', label: 'ASTRONOMY', title: 'Solar Winds', location: 'Vik, Iceland',
-                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCVFfApbG5taR-43FFTqFYHtRwDuRCaEaSpomgLjCLXL5IFPTa1xqejf8j8RtFN216zkuZdfTnJX4GfCRSIu1443tgYX_606RX_MxBCZ4MZ3vxjPI4lDfL6D1xN4DFF9cQnJ3ob8fY2n9iduFeu6rqYCjRM9V2cxDxkgKYS6SHUJO7uq-RG1YjjBEv9pbIQk7A9llH2cTNtp5Jzwf9UD_FBemGF8haqRjS2XyjT4miz-823qC3fgofQwyWpzP-VBtP5IVCZkEtYtA' },
-                { category: 'cities', label: 'FASHION', title: 'Chrome Reverie', location: 'Paris Fashion Week',
-                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqVWWsF6M4g5lWeWej1qm0Eu5AXDT0UaGk_B5AzzDomQn2a9_AUwZEF_JfxXz_HXfFCGjh2eKs7p8pzWQdOxCHko37SZqsiEHVhwqHfHogmtsGZ_2aa0wLb0XN2eutNhHFWcQKdmR0MzVSOQeund-qVqCj5lfShJsBMxIv8EXaeb_8qLi5aJSfmQ6D1ILX3NrABIjaULR9Th3NAZ7q15agJoisSALV8ylh_5Xp4mbhKdw1Ucd-Py4jdHXTLJ2ARSEEU4Tmc9kaAw' },
-                { category: 'travel', label: 'CREATIVE', title: 'Last Outpost', location: 'Digital Art Concept',
-                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB9CzmPeToC50hHNOlA1MVPJ2RJHtHOYOFSwUNBVSKmXc-8kxqKSF3cRDEC1njO-tU5UTK8EMqScGkRydiO3Td4OF7qdNKW1-yWLL4mlazVCC12AmPslcvpCBWLRjePCIh5iHpJdeHpaXOhsa0Y4hUXR53iU1qRc2jiUysvqc22uAElUlkkbWKXfoEumaE45EFsYJeGriKpGQFCo7cUIjuV0wCJAfxV5t0EcV2IADPAb68oGXWXGyOp4BMlV2jtIVCfz9X6G2tXLg' }
-            ];
+     const defaultGalleryData = [
+    { category: 'cities', label: 'ARCHITECTURAL', title: 'Silent Curves', location: 'Helsinki, Finland',
+        img: 'https://picsum.photos/id/1/600/450' },
+    { category: 'animals', label: 'WILDLIFE', title: 'Amber Watch', location: 'Bengal Tiger',
+        img: 'https://picsum.photos/id/2/600/450' },
+    { category: 'cities', label: 'URBAN', title: 'Electric Arteries', location: 'Shinjuku, Japan',
+        img: 'https://picsum.photos/id/3/600/450' },
+    { category: 'nature', label: 'NATURE', title: 'Glacial Echo', location: 'Alberta, Canada',
+        img: 'https://picsum.photos/id/4/600/450' },
+    { category: 'travel', label: 'TRAVEL', title: 'The Weaver', location: 'Marrakech, Morocco',
+        img: 'https://picsum.photos/id/5/600/450' },
+    { category: 'travel', label: 'AUTOMOTIVE', title: 'Edge of Horizon', location: 'Amalfi Coast, Italy',
+        img: 'https://picsum.photos/id/6/600/450' },
+    { category: 'nature', label: 'ASTRONOMY', title: 'Solar Winds', location: 'Vik, Iceland',
+        img: 'https://picsum.photos/id/7/600/450' },
+    { category: 'cities', label: 'FASHION', title: 'Chrome Reverie', location: 'Paris Fashion Week',
+        img: 'https://picsum.photos/id/8/600/450' },
+    { category: 'travel', label: 'CREATIVE', title: 'Last Outpost', location: 'Digital Art Concept',
+        img: 'https://picsum.photos/id/9/600/450' }
+];
 
-            // ─── Load data from localStorage or use default ────
+            // ─── RELIABLE MORE IMAGES (Picsum) ──────────────
+          const moreImages = [
+    { category: 'animals', label: 'WILDLIFE', title: 'Ocean Glide', location: 'Pacific Ocean',
+        img: 'https://picsum.photos/id/20/600/450' },
+    { category: 'cities', label: 'URBAN', title: 'Neon Pulse', location: 'Tokyo, Japan',
+        img: 'https://picsum.photos/id/30/600/450' },
+    { category: 'travel', label: 'ADVENTURE', title: 'Desert Trail', location: 'Sahara, Morocco',
+        img: 'https://picsum.photos/id/40/600/450' },
+    { category: 'nature', label: 'LANDSCAPE', title: 'Misty Morning', location: 'Lake District, UK',
+        img: 'https://picsum.photos/id/50/600/450' },
+    { category: 'cities', label: 'ARCHITECTURAL', title: 'Gothic Revival', location: 'Barcelona, Spain',
+        img: 'https://picsum.photos/id/60/600/450' }
+];
+
             let galleryData = [];
+            let hasLoadedMore = false;
 
             function loadGalleryData() {
                 try {
@@ -967,12 +973,14 @@
                         const parsed = JSON.parse(stored);
                         if (Array.isArray(parsed) && parsed.length > 0) {
                             galleryData = parsed;
+                            // Check if more images are already loaded
+                            if (galleryData.length > defaultGalleryData.length) {
+                                hasLoadedMore = true;
+                            }
                             return;
                         }
                     }
-                } catch (e) {
-                    console.warn('Failed to load from localStorage:', e);
-                }
+                } catch (e) {}
                 galleryData = JSON.parse(JSON.stringify(defaultGalleryData));
                 saveGalleryData();
             }
@@ -980,9 +988,7 @@
             function saveGalleryData() {
                 try {
                     localStorage.setItem(STORAGE_KEY, JSON.stringify(galleryData));
-                } catch (e) {
-                    console.warn('Failed to save to localStorage:', e);
-                }
+                } catch (e) {}
             }
 
             loadGalleryData();
@@ -999,17 +1005,17 @@
             const lbClose = document.getElementById('lightboxClose');
             const lbPrev = document.getElementById('lightboxPrev');
             const lbNext = document.getElementById('lightboxNext');
-
-            // Sidebar
             const sidebar = document.getElementById('mobileSidebar');
             const sidebarBackdrop = document.getElementById('sidebarBackdrop');
             const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const sidebarNavLinks = sidebar.querySelectorAll('.sidebar-nav a');
-
             const header = document.getElementById('mainHeader');
             const loadMoreBtn = document.getElementById('loadMoreBtn');
             const toast = document.getElementById('toast');
+
+            const mobileSearchInput = document.getElementById('mobileSearchInput');
+            const mobileSearchClear = document.getElementById('mobileSearchClear');
 
             // ─── Modals ──────────────────────────────────────
             const signInModal = document.getElementById('signInModal');
@@ -1048,7 +1054,7 @@
             const heroCollectionsBtn = document.getElementById('heroCollectionsBtn');
             const logoLink = document.getElementById('logoLink');
 
-            // ─── Toast helper ────────────────────────────────
+            // ─── Toast ────────────────────────────────────────
             let toastTimeout = null;
 
             function showToast(message, type = 'info', duration = 3500) {
@@ -1076,18 +1082,11 @@
                 document.body.style.overflow = '';
             }
 
-            function closeAllModals() {
-                closeModal(signInModal);
-                closeModal(uploadModal);
-            }
-
             let overflowCounter = 0;
 
             function lockScroll() {
                 overflowCounter++;
-                if (overflowCounter === 1) {
-                    document.body.style.overflow = 'hidden';
-                }
+                if (overflowCounter === 1) document.body.style.overflow = 'hidden';
             }
 
             function unlockScroll() {
@@ -1133,13 +1132,11 @@
                     valid = false;
                 }
                 if (!valid) return;
-
                 const btn = signInForm.querySelector('button[type="submit"]');
                 const orig = btn.innerHTML;
                 btn.innerHTML =
                     '<span class="flex items-center justify-center gap-2"><span class="material-symbols-outlined animate-spin text-xl">refresh</span> Signing in...</span>';
                 btn.disabled = true;
-
                 setTimeout(() => {
                     btn.innerHTML = orig;
                     btn.disabled = false;
@@ -1196,24 +1193,20 @@
             fileDropZone.addEventListener('drop', function(e) {
                 e.preventDefault();
                 this.classList.remove('dragover');
-                if (e.dataTransfer.files.length) {
-                    handleFile(e.dataTransfer.files[0]);
-                }
+                if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
             });
 
             fileInput.addEventListener('change', function() {
-                if (this.files.length) {
-                    handleFile(this.files[0]);
-                }
+                if (this.files.length) handleFile(this.files[0]);
             });
 
             function handleFile(file) {
                 if (!file.type.startsWith('image/')) {
-                    showToast('⚠️ Please select an image file (PNG, JPG, WEBP).', 'error');
+                    showToast('⚠️ Please select an image file.', 'error');
                     return;
                 }
                 if (file.size > 20 * 1024 * 1024) {
-                    showToast('⚠️ File is too large. Maximum size is 20MB.', 'error');
+                    showToast('⚠️ File too large. Max 20MB.', 'error');
                     return;
                 }
                 selectedFile = file;
@@ -1241,12 +1234,10 @@
                 filePreviewName.textContent = '';
             });
 
-            // ─── Upload form submit ──────────────────────────
             uploadForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 resetUploadErrors();
                 let valid = true;
-
                 if (!selectedFile || !uploadedImageSrc) {
                     fileError.classList.remove('hidden');
                     valid = false;
@@ -1263,7 +1254,6 @@
                     uploadCategory.classList.add('border-error');
                     valid = false;
                 }
-
                 if (!valid) return;
 
                 const btn = uploadForm.querySelector('button[type="submit"]');
@@ -1275,52 +1265,54 @@
                 setTimeout(() => {
                     btn.innerHTML = orig;
                     btn.disabled = false;
-
-                    const categoryMap = {
-                        nature: 'NATURE',
-                        animals: 'WILDLIFE',
-                        cities: 'URBAN',
-                        travel: 'TRAVEL'
-                    };
+                    const categoryMap = { nature: 'NATURE', animals: 'WILDLIFE', cities: 'URBAN',
+                        travel: 'TRAVEL' };
                     const catLabel = categoryMap[cat] || cat.toUpperCase();
                     const loc = uploadLocation.value.trim() || 'Unknown Location';
-
-                    // Add to data
-                    const newItem = {
+                    galleryData.unshift({
                         category: cat,
                         label: catLabel,
                         title: title,
                         location: loc,
                         img: uploadedImageSrc
-                    };
-                    galleryData.unshift(newItem);
+                    });
                     saveGalleryData();
-
-                    // Re-render gallery
                     renderGallery();
-
                     closeUpload();
-                    showToast('📸 "' + title + '" published to the gallery!', 'success');
+                    showToast('📸 "' + title + '" published!', 'success');
                 }, 1600);
             });
 
             // ─── Render Gallery ──────────────────────────────
             let currentIndex = 0;
             let currentFilter = 'all';
+            let searchQuery = '';
 
             function renderGallery() {
                 const filter = currentFilter;
+                const query = searchQuery.toLowerCase().trim();
                 let html = '';
                 let visibleIndices = [];
 
                 galleryData.forEach((item, idx) => {
-                    const cat = item.category;
-                    if (filter === 'all' || cat === filter) {
+                    const matchFilter = filter === 'all' || item.category === filter;
+                    const matchSearch = !query ||
+                        item.title.toLowerCase().includes(query) ||
+                        item.location.toLowerCase().includes(query) ||
+                        item.label.toLowerCase().includes(query);
+                    if (matchFilter && matchSearch) {
                         visibleIndices.push(idx);
                         html += `
-                            <div class="group relative overflow-hidden rounded-2xl bg-surface-container hover-lift h-[400px] md:h-[450px] reveal-card" data-category="${cat}" data-index="${idx}">
-                                <div class="absolute inset-0">
-                                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="${item.img}" alt="${item.title}" loading="lazy" />
+                            <div class="group relative overflow-hidden rounded-2xl bg-surface-container hover-lift h-[400px] md:h-[450px] reveal-card" data-category="${item.category}" data-index="${idx}">
+                                <div class="absolute inset-0 bg-surface-container-high">
+                                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                                         src="${item.img}" 
+                                         alt="${item.title}" 
+                                         loading="lazy"
+                                         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+                                    <div class="w-full h-full hidden items-center justify-center text-on-surface-variant/30" style="display:none;">
+                                        <span class="material-symbols-outlined text-6xl">broken_image</span>
+                                    </div>
                                 </div>
                                 <div class="absolute inset-0 image-card-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 md:p-6">
                                     <span class="text-primary font-label-caps text-label-caps mb-1">${item.label}</span>
@@ -1332,33 +1324,28 @@
                     }
                 });
 
-                galleryGrid.innerHTML = html || `<div class="col-span-full text-center py-12 text-on-surface-variant">No images found in this category.</div>`;
+                if (html === '') {
+                    html =
+                        `<div class="col-span-full text-center py-12 text-on-surface-variant">No images found matching your search.</div>`;
+                }
 
-                // Attach click events to cards
-                const cards = galleryGrid.querySelectorAll('.reveal-card');
-                cards.forEach((card) => {
+                galleryGrid.innerHTML = html;
+
+                galleryGrid.querySelectorAll('.reveal-card').forEach((card) => {
                     const idx = parseInt(card.dataset.index);
                     card.addEventListener('click', function(e) {
                         if (e.target.closest('.image-card-gradient, .absolute')) return;
                         openLightbox(idx);
                     });
-                    // Trigger reveal animation
                     observer.observe(card);
                     setTimeout(() => card.classList.add('visible'), 50);
                 });
 
-                // Update lightbox if open
                 if (!lightbox.classList.contains('hidden-lightbox')) {
-                    if (visibleIndices.length === 0) {
-                        closeLightbox();
-                    } else {
-                        // Check if current index is visible
-                        if (!visibleIndices.includes(currentIndex)) {
-                            openLightbox(visibleIndices[0]);
-                        } else {
-                            updateLightboxCounter();
-                        }
-                    }
+                    const visible = visibleIndices;
+                    if (visible.length === 0) closeLightbox();
+                    else if (!visible.includes(currentIndex)) openLightbox(visible[0]);
+                    else updateLightboxCounter();
                 }
             }
 
@@ -1402,11 +1389,9 @@
             lbNext.addEventListener('click', () => navigateLightbox(1));
 
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeLightbox();
+                if (e.key === 'Escape') { closeLightbox();
                     closeAllModals();
-                    closeSidebar();
-                }
+                    closeSidebar(); }
                 if (e.key === 'ArrowLeft' && !lightbox.classList.contains('hidden-lightbox')) navigateLightbox(-1);
                 if (e.key === 'ArrowRight' && !lightbox.classList.contains('hidden-lightbox')) navigateLightbox(1);
             });
@@ -1415,18 +1400,41 @@
                 if (e.target === this) closeLightbox();
             });
 
+            function closeAllModals() {
+                closeModal(signInModal);
+                closeModal(uploadModal);
+            }
+
             // ─── Category filtering ──────────────────────────
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     filterBtns.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     currentFilter = this.dataset.filter;
+                    if (mobileSearchInput.value) {
+                        mobileSearchInput.value = '';
+                        searchQuery = '';
+                        mobileSearchClear.style.display = 'none';
+                    }
                     renderGallery();
-                    // Update sidebar active state
                     sidebarNavLinks.forEach(link => {
                         link.classList.toggle('active-sidebar', link.dataset.category === currentFilter);
                     });
                 });
+            });
+
+            // ─── Mobile Search ──────────────────────────────────
+            mobileSearchInput.addEventListener('input', function() {
+                searchQuery = this.value;
+                mobileSearchClear.style.display = searchQuery ? 'block' : 'none';
+                renderGallery();
+            });
+
+            mobileSearchClear.addEventListener('click', function() {
+                mobileSearchInput.value = '';
+                searchQuery = '';
+                this.style.display = 'none';
+                renderGallery();
             });
 
             // ─── Sidebar ──────────────────────────────────────
@@ -1442,100 +1450,67 @@
                 unlockScroll();
             }
 
-            function toggleSidebar() {
-                if (sidebar.classList.contains('open')) {
-                    closeSidebar();
-                } else {
-                    openSidebar();
-                }
-            }
-
             mobileMenuBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                toggleSidebar();
+                if (sidebar.classList.contains('open')) closeSidebar();
+                else openSidebar();
             });
 
             sidebarCloseBtn.addEventListener('click', closeSidebar);
             sidebarBackdrop.addEventListener('click', closeSidebar);
 
-            // Sidebar nav links
             sidebarNavLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const cat = this.dataset.category;
-                    // Update filter buttons
                     filterBtns.forEach(btn => {
-                        if (btn.dataset.filter === cat) {
-                            btn.click();
-                        }
+                        if (btn.dataset.filter === cat) btn.click();
                     });
-                    // Close sidebar
                     closeSidebar();
-                    // Scroll to gallery
                     document.querySelector('#galleryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
             });
 
-            // ─── Sidebar Upload & Sign In ─────────────────────
-            sidebarUploadBtn.addEventListener('click', function() {
-                closeSidebar();
-                setTimeout(() => openUpload(), 200);
-            });
+            sidebarUploadBtn.addEventListener('click', function() { closeSidebar();
+                setTimeout(openUpload, 200); });
+            sidebarSignInBtn.addEventListener('click', function() { closeSidebar();
+                setTimeout(openSignIn, 200); });
 
-            sidebarSignInBtn.addEventListener('click', function() {
-                closeSidebar();
-                setTimeout(() => openSignIn(), 200);
-            });
-
-            // ─── Sticky header ──────────────────────────────
-            let lastScroll = 0;
-            window.addEventListener('scroll', function() {
-                const y = window.scrollY;
-                if (y > 20) {
-                    header.classList.add('py-2', 'shadow-xl');
-                    header.classList.remove('py-3', 'md:py-4', 'shadow-sm');
-                } else {
-                    header.classList.add('py-3', 'md:py-4', 'shadow-sm');
-                    header.classList.remove('py-2', 'shadow-xl');
-                }
-                lastScroll = y;
-            }, { passive: true });
-
-            // ─── Intersection Observer ──────────────────────
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
-
-            // ─── Load More ────────────────────────────────────
-            loadMoreBtn.addEventListener('click', function() {
-                const original = this.innerHTML;
-                this.innerHTML =
-                    '<span class="material-symbols-outlined animate-spin">refresh</span> Loading...';
-                this.disabled = true;
-                setTimeout(() => {
-                    this.innerHTML = original;
-                    this.disabled = false;
-                    showToast('✨ All masterpieces are already displayed!', 'info');
-                }, 1200);
-            });
-
-            // ─── Desktop nav filter links ─────────────────────
+            // ─── Desktop nav ──────────────────────────────────
             document.querySelectorAll('.desktop-nav-wrap a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const cat = this.dataset.category;
                     filterBtns.forEach(btn => {
-                        if (btn.dataset.filter === cat) {
-                            btn.click();
-                            document.querySelector('#galleryGrid').scrollIntoView({ behavior: 'smooth',
-                                block: 'start' });
-                        }
+                        if (btn.dataset.filter === cat) btn.click();
                     });
+                    document.querySelector('#galleryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
+            });
+
+            // ─── Load More ────────────────────────────────────
+            loadMoreBtn.addEventListener('click', function() {
+                if (hasLoadedMore) {
+                    showToast('✨ All masterpieces are already displayed!', 'info');
+                    return;
+                }
+
+                const original = this.innerHTML;
+                this.innerHTML =
+                    '<span class="material-symbols-outlined animate-spin">refresh</span> Loading...';
+                this.disabled = true;
+
+                setTimeout(() => {
+                    moreImages.forEach(img => {
+                        galleryData.push(img);
+                    });
+                    saveGalleryData();
+                    hasLoadedMore = true;
+                    renderGallery();
+                    this.innerHTML = original;
+                    this.disabled = false;
+                    showToast('🎉 Added ' + moreImages.length + ' new masterpieces!', 'success');
+                }, 1000);
             });
 
             // ─── Action buttons ──────────────────────────────
@@ -1549,9 +1524,7 @@
 
             heroCollectionsBtn.addEventListener('click', function() {
                 document.querySelector('#galleryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                setTimeout(() => {
-                    showToast('📚 Browse our curated collections below!', 'info');
-                }, 400);
+                setTimeout(() => showToast('📚 Browse our curated collections!', 'info'), 400);
             });
 
             logoLink.addEventListener('click', function(e) {
@@ -1559,29 +1532,31 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
+            // ─── Sticky header ──────────────────────────────
+            window.addEventListener('scroll', function() {
+                const y = window.scrollY;
+                if (y > 20) {
+                    header.classList.add('py-2', 'shadow-xl');
+                    header.classList.remove('py-3', 'md:py-4', 'shadow-sm');
+                } else {
+                    header.classList.add('py-3', 'md:py-4', 'shadow-sm');
+                    header.classList.remove('py-2', 'shadow-xl');
+                }
+            }, { passive: true });
+
+            // ─── Observer ──────────────────────────────────────
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+
             // ─── Init ──────────────────────────────────────────
             renderGallery();
             document.body.style.overflow = '';
 
-            // ─── Handle sidebar category sync ──────────────
-            // Update sidebar active state when filter changes
-            const filterObserver = new MutationObserver(() => {
-                const activeFilter = document.querySelector('.filter-btn.active');
-                if (activeFilter) {
-                    const cat = activeFilter.dataset.filter;
-                    sidebarNavLinks.forEach(link => {
-                        link.classList.toggle('active-sidebar', link.dataset.category === cat);
-                    });
-                }
-            });
-            filterBtns.forEach(btn => {
-                filterObserver.observe(btn, { attributes: true, attributeFilter: ['class'] });
-            });
+            console.log('✨ LUMINA Gallery loaded. ' + galleryData.length + ' items.');
 
-            console.log('✨ LUMINA Gallery initialized. ' + galleryData.length + ' items loaded from ' + (localStorage
-                .getItem(STORAGE_KEY) ? 'storage' : 'defaults'));
-
-            // ─── Expose for debugging ──────────────────────
             window.__LUMINA = {
                 galleryData,
                 openLightbox,
@@ -1589,8 +1564,7 @@
                 showToast,
                 openUpload,
                 openSignIn,
-                renderGallery,
-                toggleSidebar
+                renderGallery
             };
 
         })();
